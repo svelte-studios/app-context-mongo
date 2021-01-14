@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "release": "yarn test && standard-version && git push --follow-tags && npm publish",
     "test": "yarn lint && jest",
-    "db:mongo": "run-rs"
+    "db:mongo": "run-rs --keep"
   },
   "dependencies": {
     "mongodb": "^3.6.3"
