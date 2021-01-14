@@ -1,0 +1,20 @@
+{
+  "root": true,
+  "env": { "es6": true, "jest": true, "node": true },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "extends": [
+    "prettier",
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "plugins": ["@babel", "prettier", "import"],
+  "rules": {
+    "import/no-unresolved": ["error",{"commonjs": true}],
+    "@babel/semi": "off"
+  }
+}
