@@ -8,7 +8,7 @@ class User {
 }
 
 //actions
-User.prototype.createUser = function ({ username }) {
+User.prototype.createUser = function (context, { username }) {
   const event = { eventType: 'CREATED_USER', data: { username } };
   this.CREATED_USER(event);
   return event;
