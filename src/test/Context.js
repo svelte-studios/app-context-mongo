@@ -19,7 +19,7 @@ export default () => {
 const fakeSession = () => ({
   events: [],
   callAction(agg, method, args) {
-    return Promise.resolve(this.events.push(agg[method](args)));
+    return Promise.resolve(this.events.push(agg[method](undefined, args)));
   },
   getEvents() {
     return this.events;
