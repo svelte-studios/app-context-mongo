@@ -1,4 +1,4 @@
-export default context => (Type, collection, eventsCollection) => {
+module.exports = context => (Type, collection, eventsCollection) => {
   const _eventsCollection = eventsCollection || `${collection}Events`;
 
   return {
@@ -10,6 +10,7 @@ export default context => (Type, collection, eventsCollection) => {
           .collection(collection)
           .findOne(args, { session: transaction })
           .then(data => {
+            if (!data) throw new Error('Aggregate not found');
             data.lastUpdated = new Date(data.lastUpdated);
             return new Type(data);
           });
@@ -26,7 +27,7 @@ export default context => (Type, collection, eventsCollection) => {
         agg.lastUpdated = new Date();
 
         promises.push(
-          db.collection(collection).updateOne({ id: agg._id }, { $set: agg }, { upsert: true, session: transaction })
+          db.collection(collection).updateOne({ _id: agg._id }, { $set: agg }, { upsert: true, session: transaction })
         );
         if (events.length) promises.push(db.collection(_eventsCollection).insert(events, { session: transaction }));
         return Promise.all(promises);
