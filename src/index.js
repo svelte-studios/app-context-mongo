@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 
-export default context => {
+module.exports = context => {
   const url = process.env.MONGO_URL || 'mongodb://localhost:27017,localhost:27018,localhost:27019?replicaSet=rs';
   const dbName = process.env.MONGO_DB || 'test';
 
@@ -18,7 +18,6 @@ export default context => {
         .then(() => {})
         .catch(err => {
           $logger.error(err);
-
           throw new Error('Transaction failed - Rolling back');
         });
     };
