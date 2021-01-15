@@ -1,15 +1,18 @@
 {
-  "name": "app-context-mongo",
-  "version": "1.0.0",
+  "name": "@svelte-studios/app-context-mongo",
+  "version": "0.0.1",
   "main": "src/index.js",
   "repository": "https://github.com/svelte-studios/app-context-mongo.git",
   "author": "Svelte Studios <info@sveltestudios.com>",
   "license": "MIT",
   "scripts": {
+    "db:mongo": "run-rs --keep",
     "lint": "eslint .",
-    "release": "yarn test && standard-version && git push --follow-tags && npm publish",
     "test": "yarn lint && jest",
-    "db:mongo": "run-rs --keep"
+    "postinstall": "husky install",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable",
+    "release": "yarn test && yarn publish --access public && git push origin --tags"
   },
   "dependencies": {
     "mongodb": "^3.6.3"
