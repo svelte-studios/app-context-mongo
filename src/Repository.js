@@ -10,7 +10,7 @@ module.exports = context => (Type, collection, eventsCollection) => {
           .collection(collection)
           .findOne(args, { session: transaction })
           .then(data => {
-            if (!data) throw new Error('Aggregate not found');
+            if (!data) return undefined;
             data.lastUpdated = new Date(data.lastUpdated);
             return new Type(data);
           });

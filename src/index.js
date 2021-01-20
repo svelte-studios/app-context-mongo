@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 
-module.exports = context => {
+module.exports = (context, collections) => {
   const url = process.env.MONGO_URL || 'mongodb://localhost:27017,localhost:27018,localhost:27019?replicaSet=rs';
   const dbName = process.env.MONGO_DB || 'test';
 
@@ -22,7 +22,15 @@ module.exports = context => {
         });
     };
 
-    return { db, client, BeginTransaction };
+    return db
+      .listCollections()
+      .toArray()
+      .then(list => {
+        const missingCollections = collections.filter(c => !list.find(l => l.name === c));
+        return Promise.all(missingCollections.map(mc => db.createCollection(mc))).then(() => {
+          return { db, client, BeginTransaction };
+        });
+      });
   });
 
   return $mongo;

@@ -10,7 +10,7 @@ export default () => {
     },
   };
   context.$id = () => 'testId';
-  context.$mongo = Mongo(context);
+  context.$mongo = Mongo(context, ['users', 'usersEvents']);
   context.Repository = Repository(context);
   context.Session = fakeSession;
   return context;
