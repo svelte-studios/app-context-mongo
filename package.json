@@ -8,7 +8,7 @@
   "scripts": {
     "db:mongo": "run-rs --keep",
     "lint": "eslint .",
-    "test": "yarn lint && jest",
+    "test": "yarn lint && jest --runInBand",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable",
