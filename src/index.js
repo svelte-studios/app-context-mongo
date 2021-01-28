@@ -33,7 +33,7 @@ module.exports = (context, collections) => {
           })
           .catch(err => {
             $logger.error(err);
-            throw new Error(err);
+            throw new Error(err && err.message);
           });
       });
   });
