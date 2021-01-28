@@ -1,6 +1,6 @@
 {
   "name": "@svelte-studios/app-context-mongo",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "src/index.js",
   "repository": "https://github.com/svelte-studios/app-context-mongo.git",
   "author": "Svelte Studios <info@sveltestudios.com>",
