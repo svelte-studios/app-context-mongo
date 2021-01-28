@@ -27,9 +27,14 @@ module.exports = (context, collections) => {
       .toArray()
       .then(list => {
         const missingCollections = collections.filter(c => !list.find(l => l.name === c));
-        return Promise.all(missingCollections.map(mc => db.createCollection(mc))).then(() => {
-          return { db, client, BeginTransaction };
-        });
+        return Promise.all(missingCollections.map(mc => db.createCollection(mc)))
+          .then(() => {
+            return { db, client, BeginTransaction };
+          })
+          .catch(err => {
+            $logger.error(err);
+            throw new Error(err);
+          });
       });
   });
 
