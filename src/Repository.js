@@ -1,4 +1,5 @@
 module.exports = context => (Type, collection, eventsCollection) => {
+  const _collection = collection ? collection : Type.collection;
   const _eventsCollection = eventsCollection || `${collection}Events`;
 
   return {
@@ -29,7 +30,7 @@ module.exports = context => (Type, collection, eventsCollection) => {
         promises.push(
           db.collection(collection).updateOne({ _id: agg._id }, { $set: agg }, { upsert: true, session: transaction })
         );
-        if (events.length) promises.push(db.collection(_eventsCollection).insert(events, { session: transaction }));
+        if (events.length) promises.push(db.collection(_eventsCollection).insertMany(events, { session: transaction }));
         return Promise.all(promises);
       });
     },

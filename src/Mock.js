@@ -1,8 +1,8 @@
-export default function () {
+module.exports = function () {
   $mongo = Promise.resolve({
-    CreateTransaction: callback => {
+    BeginTransaction: callback => {
       return callback();
     },
   });
   return $mongo;
-}
+};
